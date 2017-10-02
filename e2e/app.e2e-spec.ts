@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('prova-client-electron1 App', () => {
+describe('primo-client-electron2 App', () => {
   let page: AppPage;
 
   beforeEach(() => {
