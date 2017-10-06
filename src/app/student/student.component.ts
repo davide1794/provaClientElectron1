@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Student} from '../student';
 import {StudentService} from '../student.service';
 
@@ -12,8 +13,15 @@ export class StudentComponent implements OnInit {
 
   students: Student[];
   newStudent: Student;
+  form: FormGroup;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, @Inject(FormBuilder) fb: FormBuilder) {
+    this.form = fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthYear: ['', Validators.required]
+    });
+  }
 
   getStudents(): void {
     this.studentService
@@ -26,9 +34,13 @@ export class StudentComponent implements OnInit {
     this.getStudents();
   }
 
-  createStudent(newStudent): void {
-    this.studentService.createStudent(newStudent)
-      .then(student => this.students.concat(student));
+  createStudent(): void {
+    this.newStudent.firstName = this.form.value.firstName;
+    this.newStudent.lastName = this.form.value.lastName;
+    this.newStudent.birthYear = this.form.value.birthYear;
+    this.studentService.createStudent(this.newStudent)
+      .then(() => this.getStudents());
+    this.form.reset();
   }
 
 }
