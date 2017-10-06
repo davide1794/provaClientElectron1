@@ -13,7 +13,14 @@ export class StudentService {
   getStudents(): Promise<Student[]> {
     return this.http.get(this.studentUrl)
       .toPromise()
-      .then(response => response.json().data as Student[]);
+      .then(response => response.json()._embedded.students as Student[]);
+  }
+
+  createStudent(newStudent: Student): Promise<Student> {
+    return this.http
+      .post(this.studentUrl, JSON.stringify({newStudent}))
+      .toPromise()
+      .then(res => res.json()._embedded.student as Student);
   }
 
 }

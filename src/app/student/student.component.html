@@ -1,6 +1,9 @@
 <p>Students:</p>
-<ul>
-  <li *ngFor="let student of students">
-    <span>{{ student.firstName }}</span>
+<input [(ngModel)]="query" placeholder="Search..">
+<ul class="list-group">
+  <li *ngFor="let student of students | search:'firstName,lastName':query " class="list-group-item list-group-item-action">
+    <span>{{ student.firstName }} </span>{{ student.lastName }}
   </li>
 </ul>
+
+

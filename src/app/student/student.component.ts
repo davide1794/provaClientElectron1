@@ -11,12 +11,24 @@ import {StudentService} from '../student.service';
 export class StudentComponent implements OnInit {
 
   students: Student[];
+  newStudent: Student;
 
   constructor(private studentService: StudentService) { }
 
-  ngOnInit() {
-    this.studentService.getStudents()
+  getStudents(): void {
+    this.studentService
+      .getStudents()
       .then(students => this.students = students);
+  }
+
+  ngOnInit() {
+    this.newStudent = new Student();
+    this.getStudents();
+  }
+
+  createStudent(newStudent): void {
+    this.studentService.createStudent(newStudent)
+      .then(student => this.students.concat(student));
   }
 
 }
