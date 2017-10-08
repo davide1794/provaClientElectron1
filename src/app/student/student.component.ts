@@ -14,6 +14,7 @@ export class StudentComponent implements OnInit {
   students: Student[];
   newStudent: Student;
   form: FormGroup;
+  query ="";
 
   constructor(private studentService: StudentService, @Inject(FormBuilder) fb: FormBuilder) {
     this.form = fb.group({
