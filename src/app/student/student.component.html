@@ -3,6 +3,9 @@
 <ul class="list-group">
   <li *ngFor="let student of students | search:'firstName,lastName':query " class="list-group-item list-group-item-action">
     <span>{{ student.firstName }} {{ student.lastName }} </span>
+    <button type="button" (click)="deleteStudent(student)" >
+      <span class="oi oi-delete"></span>
+    </button>
   </li>
 </ul>
 <form [formGroup]="form" (submit)="createStudent()">

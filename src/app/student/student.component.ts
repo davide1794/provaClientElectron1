@@ -44,4 +44,9 @@ export class StudentComponent implements OnInit {
     this.form.reset();
   }
 
+  deleteStudent(student: Student): void {
+    this.studentService.deleteStudent(student);
+    this.students = this.students.filter(element => element !== student);
+  }
+
 }

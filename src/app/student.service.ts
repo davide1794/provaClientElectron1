@@ -17,11 +17,16 @@ export class StudentService {
       .then(response => response.json()._embedded.students as Student[]);
   }
 
-  createStudent(newStudent: Student): Promise<Student> {
+  createStudent(student: Student): Promise<Student> {
     return this.http
-      .post(this.studentUrl, JSON.stringify(newStudent), {headers: this.headers})
+      .post(this.studentUrl, JSON.stringify(student), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Student);
   }
 
+  deleteStudent(student: Student): void {
+    const url = student._links.self.href;
+    this.http.delete(url, {headers: this.headers})
+      .subscribe();
+  }
 }
