@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Student} from '../student';
+import {Student} from 'prova-esse3';
 import {StudentService} from '../student.service';
 
 

@@ -2,7 +2,7 @@
 <input [(ngModel)]="query" placeholder="Search..">
 <ul class="list-group">
   <li *ngFor="let student of students | search:'firstName,lastName':query " class="list-group-item list-group-item-action">
-    <span>{{ student.firstName }} </span>{{ student.lastName }}
+    <span>{{ student.firstName }} {{ student.lastName }} </span>
   </li>
 </ul>
 <form [formGroup]="form" (submit)="createStudent()">

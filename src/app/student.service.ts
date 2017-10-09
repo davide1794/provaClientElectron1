@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Student} from './student';
+import {Student} from 'prova-esse3';
 import {Headers, Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
