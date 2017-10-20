@@ -2,12 +2,15 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Student} from 'prova-esse3';
 import {StudentService} from '../student.service';
+import {StudentsSocketService} from "../students-socket.service";
+import {WebsocketService} from "../websocket.service";
 
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  styleUrls: ['./student.component.css'],
+  providers: [ WebsocketService, StudentsSocketService ]
 })
 export class StudentComponent implements OnInit {
 
@@ -16,7 +19,7 @@ export class StudentComponent implements OnInit {
   form: FormGroup;
   query ="";
 
-  constructor(private studentService: StudentService, @Inject(FormBuilder) fb: FormBuilder) {
+  constructor(private studentService: StudentService, private fb: FormBuilder, private studentsSocketService: StudentsSocketService) {
     this.form = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],

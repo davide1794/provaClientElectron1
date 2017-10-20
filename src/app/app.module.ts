@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {SearchPipe} from './searchPipe';
 import { StudentComponent } from './student/student.component';
+import {WebsocketService} from "./websocket.service";
+import {StudentsSocketService} from "./students-socket.service";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { StudentComponent } from './student/student.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [StudentService],
+  providers: [StudentService, WebsocketService, StudentsSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
