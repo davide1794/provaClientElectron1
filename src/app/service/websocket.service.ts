@@ -25,14 +25,14 @@ export class WebsocketService {
         ws.onerror = obs.error.bind(obs);
         ws.onclose = obs.complete.bind(obs);
         return ws.close.bind(ws);
-      })
+      });
     let observer = {
       next: (data: Object) => {
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify(data));
         }
       }
-    }
+    };
     return Rx.Subject.create(observer, observable);
   }
 

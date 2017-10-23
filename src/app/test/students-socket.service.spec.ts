@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { StudentsSocketService } from './students-socket.service';
+import { StudentsSocketService } from '../service/students-socket.service';
 
 describe('StudentsSocketService', () => {
   beforeEach(() => {

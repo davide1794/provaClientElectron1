@@ -8,10 +8,6 @@
     </button>
   </li>
 </ul>
-<form [formGroup]="form" (submit)="createStudent()">
-  <input formControlName="firstName" placeholder="First">
-  <input formControlName="lastName" placeholder="Last">
-  <input formControlName="birthYear" placeholder="Birthday">
-  <button [disabled]="!form.valid">Add</button>
-</form>
+<button (click)="openForm()"></button>
+
 

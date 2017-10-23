@@ -1,15 +1,17 @@
+const fs = require('fs')
+const os = require('os')
 const electron = require('electron')
-// Module to control application life.
+const ipc = electron.ipcMain
+const shell = electron.shell
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
-
 const path = require('path')
 const url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow, studentForm;
 
 function createWindow () {
   // Create the browser window.
@@ -33,6 +35,25 @@ function createWindow () {
     mainWindow = null
   })
 }
+
+function createFormStudent () {
+  studentForm = new BrowserWindow({width: 800, height: 600})
+  studentForm.on('closed', function () {
+    studentForm = null
+  })
+
+
+  // Or load a local HTML file
+  win.loadURL(`file://${__dirname}/app/views/studentForm.component.html`)
+}
+
+app.on('windows-student-form-active', function () {
+  createFormStudent();
+})
+
+app.on('windows-student-form-close', function () {
+  studentForm = null;
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
