@@ -3,7 +3,8 @@ import {Student} from 'prova-esse3';
 import {StudentService} from '../service/student.service';
 import {StudentsSocketService} from "../service/students-socket.service";
 import {WebsocketService} from "../service/websocket.service";
-import { ipcRenderer } from 'electron';
+import * as electron from 'electron';
+const ipcRenderer = electron.ipcRenderer;
 
 
 

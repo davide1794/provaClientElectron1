@@ -6,6 +6,7 @@ import { ipcRenderer } from 'electron';
 
 
 @Component({
+  selector: 'student-root',
   templateUrl: '../views/student.component.html',
   styleUrls: ['../styles/student.component.css']
 })

@@ -44,7 +44,7 @@ function createFormStudent () {
 
 
   // Or load a local HTML file
-  win.loadURL(`file://${__dirname}/app/views/studentForm.component.html`)
+  win.loadURL(`file://${__dirname}/app/student.html`)
 }
 
 app.on('windows-student-form-active', function () {
