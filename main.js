@@ -37,14 +37,19 @@ function createWindow () {
 }
 
 function createFormStudent () {
-  studentForm = new BrowserWindow({width: 800, height: 600})
+  studentForm = new BrowserWindow({
+    width: 800,
+    height: 600,
+    parent: mainWindow})
   studentForm.on('closed', function () {
     studentForm = null
   })
 
 
   // Or load a local HTML file
-  win.loadURL(`file://${__dirname}/app/student.html`)
+  win.loadURL(`file://${__dirname}/student.html`)
+
+  studentForm.show()
 }
 
 app.on('windows-student-form-active', function () {

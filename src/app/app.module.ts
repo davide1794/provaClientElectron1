@@ -10,8 +10,6 @@ import {SearchPipe} from './pipe/searchPipe';
 import { StudentComponent } from './component/student.component';
 import {WebsocketService} from "./service/websocket.service";
 import {StudentsSocketService} from "./service/students-socket.service";
-import {StudentFormComponent} from "./component/studentForm.component";
-import {StudentModule} from "./module/student.module";
 
 @NgModule({
   declarations: [

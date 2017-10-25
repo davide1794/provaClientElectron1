@@ -16,7 +16,7 @@ const { AotPlugin } = require('@ngtools/webpack');
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
-const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main","secondRenderer"];
+const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main","electronStudent"];
 const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
@@ -82,7 +82,7 @@ module.exports = {
     "main": [
       "./src\\main.ts"
     ],
-    "secondRenderer": [
+    "electronStudent": [
       "./src/app/electron-student.ts"
     ],
     "polyfills": [
@@ -353,40 +353,6 @@ module.exports = {
   },
   "plugins": [
     new NoEmitOnErrorsPlugin(),
-    new HtmlWebpackPlugin({
-      "template": "./src/app/student.html",
-      "filename": "./app/student.html",
-      "hash": false,
-      "inject": true,
-      "compile": true,
-      "favicon": false,
-      "minify": false,
-      "cache": true,
-      "showErrors": true,
-      "chunks": "all",
-      "excludeChunks": [
-        "app",
-        "login",
-        "equalizer-view",
-        "first-user",
-        "screenshot-view"
-      ],
-      "title": "Webpack App",
-      "xhtml": true,
-      "chunksSortMode": function sort(left, right) {
-        let leftIndex = entryPoints.indexOf(left.names[0]);
-        let rightindex = entryPoints.indexOf(right.names[0]);
-        if (leftIndex > rightindex) {
-          return 1;
-        }
-        else if (leftIndex < rightindex) {
-          return -1;
-        }
-        else {
-          return 0;
-        }
-      }
-    }),
     new CopyWebpackPlugin([
       {
         "context": "src",
@@ -427,7 +393,9 @@ module.exports = {
       "cache": true,
       "showErrors": true,
       "chunks": "all",
-      "excludeChunks": [],
+      "excludeChunks": [
+        "electronStudent"
+      ],
       "title": "Webpack App",
       "xhtml": true,
       "chunksSortMode": function sort(left, right) {
@@ -443,6 +411,36 @@ module.exports = {
             return 0;
         }
     }
+    }),
+    new HtmlWebpackPlugin({
+      "template": "./src\\student.html",
+      "filename": "./student.html",
+      "hash": false,
+      "inject": true,
+      "compile": true,
+      "favicon": false,
+      "minify": false,
+      "cache": true,
+      "showErrors": true,
+      "chunks": "all",
+      "excludeChunks": [
+        "main"
+      ],
+      "title": "Webpack App",
+      "xhtml": true,
+      "chunksSortMode": function sort(left, right) {
+        let leftIndex = entryPoints.indexOf(left.names[0]);
+        let rightindex = entryPoints.indexOf(right.names[0]);
+        if (leftIndex > rightindex) {
+          return 1;
+        }
+        else if (leftIndex < rightindex) {
+          return -1;
+        }
+        else {
+          return 0;
+        }
+      }
     }),
     new BaseHrefWebpackPlugin({}),
     new CommonsChunkPlugin({
@@ -462,7 +460,8 @@ module.exports = {
                         || module.resource.startsWith(realNodeModules));
             },
       "chunks": [
-        "main"
+        "main",
+        "electronStudent"
       ]
     }),
     new SourceMapDevToolPlugin({
