@@ -111,13 +111,15 @@ module.exports = {
         "test": /\.html$/,
         "loader": "raw-loader"
       },
+      // the url-loader uses DataUrls.
+      // the file-loader emits files.
       {
-        "test": /\.(eot|svg|cur)$/,
-        "loader": "file-loader?name=[name].[hash:20].[ext]"
+        "test": /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        "loader": "url-loader?limit=10000&mimetype=application/font-woff"
       },
       {
-        "test": /\.(jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
-        "loader": "url-loader?name=[name].[hash:20].[ext]&limit=10000"
+        "test": /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        "loader": "file-loader"
       },
       {
         "exclude": [
@@ -491,7 +493,7 @@ module.exports = {
   ],
   "node": {
     "fs": "empty",
-    "global": true,
+    "global": false,
     "crypto": "empty",
     "tls": "empty",
     "net": "empty",

@@ -19,7 +19,9 @@ export class StudentComponent implements OnInit {
   students: Student[];
   newStudent: Student;
 
-  constructor(private studentService: StudentService, private studentsSocketService: StudentsSocketService) { }
+  constructor(private studentService: StudentService, private studentsSocketService: StudentsSocketService) {
+    studentsSocketService.messages.subscribe();
+  }
 
   getStudents(): void {
     this.studentService
@@ -38,7 +40,7 @@ export class StudentComponent implements OnInit {
   }
 
   openForm(): void {
-    ipcRenderer.send('windows-student-form-active');
+    ipcRenderer.send('windows-student-form-active', this.studentsSocketService);
   }
 
 }

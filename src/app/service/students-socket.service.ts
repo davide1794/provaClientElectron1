@@ -7,10 +7,10 @@ const URL = 'ws://localhost:8080/name';
 
 @Injectable()
 export class StudentsSocketService {
-  public studentsSocket: Subject<Student>;
+  public messages: Subject<Student>;
 
   constructor(wsService: WebsocketService) {
-    this.studentsSocket = <Subject<Student>>wsService
+    this.messages = <Subject<Student>>wsService
       .connect(URL)
       .map((response: MessageEvent): Student => {
         let data = JSON.parse(response.data);

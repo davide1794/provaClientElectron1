@@ -1,10 +1,6 @@
-const fs = require('fs')
-const os = require('os')
 const electron = require('electron')
-const ipc = electron.ipcMain
-const shell = electron.shell
+const ipcMain = electron.ipcMain;
 const app = electron.app
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
@@ -47,16 +43,25 @@ function createFormStudent () {
 
 
   // Or load a local HTML file
-  win.loadURL(`file://${__dirname}/student.html`)
+  studentForm.loadURL(url.format({
+    pathname: path.join(__dirname, 'dist/student.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
 
   studentForm.show()
 }
 
-app.on('windows-student-form-active', function () {
+ipcMain.on('windows-student-form-active', function (event, studentsSocketService) {
+  global.sharedObj = {
+    'studentsSocketService': studentsSocketService
+  };
   createFormStudent();
 })
 
-app.on('windows-student-form-close', function () {
+ipcMain.on('windows-student-form-close', function () {
+  if (studentForm)
+    studentForm.close();
   studentForm = null;
 })
 
