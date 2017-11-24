@@ -25,7 +25,7 @@ export class StudentComponent implements OnInit {
   private wsURL: string = 'ws://localhost:8080/name';
 
   constructor(private studentService: StudentService, private fb: FormBuilder) {
-    this.wsConnect().subscribe();
+    this.wsConnect();
     this.form = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
