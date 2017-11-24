@@ -6,6 +6,7 @@ import {WebsocketService} from "../service/websocket.service";
 import * as electron from 'electron';
 import * as WebSocket from "ws";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Data} from "ws";
 const ipcRenderer = electron.ipcRenderer;
 
 
@@ -35,17 +36,18 @@ export class StudentComponent implements OnInit {
 
   private wsConnect() {
     this.wsConnection = new WebSocket(this.wsURL);
-    this.wsConnection.on('message', (evt: MessageEvent) => this.onMessage(evt));
+    this.wsConnection.on('open', () =>console.log("Aperta"));
+    this.wsConnection.on('error', (err: Error) => console.log(err));
+    this.wsConnection.on('message', (message) =>console.log(message.toString()));
   }
 
-  private onMessage(evt: MessageEvent) {
-    let data = JSON.parse(evt.data);
-    this.newStudent = new Student();
+  private onMessage(data: Data) {
+    /*this.newStudent = new Student();
     this.newStudent.firstName = data.firstName;
     this.newStudent.lastName = data.lastName;
     this.newStudent.birthYear = data.birthYear;
 
-    this.students.push(this.newStudent);
+    this.students.push(this.newStudent);*/
   }
 
 
